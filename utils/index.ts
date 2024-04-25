@@ -60,6 +60,7 @@ export async function fetchCars(filters: FilterProps) {
     }
   );
 
+
   // Parse the response as JSON
   const result = await response.json();
 
