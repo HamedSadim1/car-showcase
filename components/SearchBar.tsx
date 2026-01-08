@@ -19,8 +19,12 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
 );
 
 const SearchBar = () => {
-  const [manufacturer, setManuFacturer] = useState("");
+  const [manufacturer, setManufacturerState] = useState("");
   const [model, setModel] = useState("");
+
+  const setManuFacturer = (value: string | null) => {
+    setManufacturerState(value || "");
+  };
 
   const router = useRouter();
 
@@ -31,7 +35,7 @@ const SearchBar = () => {
       return alert("Please provide some input");
     }
 
-    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+    updateSearchParams(model, manufacturer);
   };
 
   const updateSearchParams = (model: string, manufacturer: string) => {

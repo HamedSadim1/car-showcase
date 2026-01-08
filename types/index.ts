@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 
 export interface CarProps {
-  id:string
+  id: string;
   city_mpg: number;
   class: string;
   combination_mpg: number;
@@ -25,7 +25,7 @@ export interface FilterProps {
 }
 
 export interface HomeProps {
-  searchParams: FilterProps;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export interface CarCardProps {
@@ -65,5 +65,5 @@ export interface ShowMoreProps {
 
 export interface SearchManuFacturerProps {
   manufacturer: string;
-  setManuFacturer: (manufacturer: string) => void;
+  setManuFacturer: (manufacturer: string | null) => void;
 }
