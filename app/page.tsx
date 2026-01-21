@@ -2,6 +2,8 @@ import { fetchCars } from "@/utils";
 import { fuels, yearsOfProduction } from "@/constants";
 import { CarCard, ShowMore, SearchBar, CustomFilter, Hero } from "@/components";
 
+export const dynamic = "force-dynamic";
+
 // Server Component voor de home pagina
 export default async function Home({
   searchParams,
@@ -67,7 +69,7 @@ export default async function Home({
         ) : (
           <div className="home__error-container">
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-            <p>{(allCars as any)?.message}</p>
+            <p>{(allCars as { message?: string })?.message}</p>
           </div>
         )}
       </div>

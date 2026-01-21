@@ -2,12 +2,22 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import SearchManufacturer from "./SearchManufacturer";
 
-const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
-  <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
+const SearchButton = ({
+  otherClasses,
+  handleClick,
+}: {
+  otherClasses: string;
+  handleClick?: () => void;
+}) => (
+  <button
+    type="button"
+    className={`-ml-3 z-10 ${otherClasses}`}
+    onClick={handleClick}
+  >
     <Image
       src={"/magnifying-glass.svg"}
       alt={"magnifying glass"}
@@ -26,52 +36,62 @@ const SearchBar = () => {
     setManufacturerState(value || "");
   };
 
+  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSearch = () => {
+    console.log("handleSearch called", { manufacturer, model });
     if (manufacturer.trim() === "" && model.trim() === "") {
+      console.log("handleSearch: empty input");
       return alert("Please provide some input");
     }
 
     updateSearchParams(model, manufacturer);
   };
 
-  const updateSearchParams = (model: string, manufacturer: string) => {
-    // Create a new URLSearchParams object using the current URL search parameters
-    const searchParams = new URLSearchParams(window.location.search);
+  const updateSearchParams = async (model: string, manufacturer: string) => {
+    // Build a mutable URLSearchParams from the readonly searchParams
+    const newSearchParams = new URLSearchParams(
+      Array.from(searchParams.entries()),
+    );
 
-    // Update or delete the 'model' search parameter based on the 'model' value
     if (model) {
-      searchParams.set("model", model);
+      newSearchParams.set("model", model);
     } else {
-      searchParams.delete("model");
+      newSearchParams.delete("model");
     }
 
-    // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
     if (manufacturer) {
-      searchParams.set("manufacturer", manufacturer);
+      newSearchParams.set("manufacturer", manufacturer);
     } else {
-      searchParams.delete("manufacturer");
+      newSearchParams.delete("manufacturer");
     }
 
-    // Generate the new pathname with the updated search parameters
-    const newPathname = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
+    // Keep the same pathname to ensure correct route; use absolute path for reliability
+    const pathname = window.location.pathname || "/";
+    const to = `${pathname}?${newSearchParams.toString()}`;
+    console.log("updateSearchParams -> pushing", to);
+    try {
+      await router.push(to);
+    } catch (err) {
+      console.error("router.push error", err);
+    }
+  };
 
-    router.push(newPathname);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
-    <form className="searchbar" onSubmit={handleSearch}>
+    <div className="searchbar">
       <div className="searchbar__item">
         <SearchManufacturer
           manufacturer={manufacturer}
           setManuFacturer={setManuFacturer}
         />
-        <SearchButton otherClasses="sm:hidden" />
+        <SearchButton otherClasses="sm:hidden" handleClick={handleSearch} />
       </div>
       <div className="searchbar__item">
         <Image
@@ -86,13 +106,14 @@ const SearchBar = () => {
           name="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Tiguan..."
           className="searchbar__input"
         />
-        <SearchButton otherClasses="sm:hidden" />
+        <SearchButton otherClasses="sm:hidden" handleClick={handleSearch} />
       </div>
-      <SearchButton otherClasses="max-sm:hidden" />
-    </form>
+      <SearchButton otherClasses="max-sm:hidden" handleClick={handleSearch} />
+    </div>
   );
 };
 

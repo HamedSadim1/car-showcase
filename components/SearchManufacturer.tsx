@@ -18,7 +18,7 @@ const SearchManufacturer = ({
           item
             .toLowerCase()
             .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
+            .includes(query.toLowerCase().replace(/\s+/g, "")),
         );
 
   return (
@@ -40,7 +40,12 @@ const SearchManufacturer = ({
           <Combobox.Input
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
-            onChange={(event) => setQuery(event.target.value)} // Update the search query when the input changes
+            value={manufacturer}
+            onChange={(event) => {
+              const val = event.target.value;
+              setQuery(val); // Update the dropdown filter
+              setManuFacturer(val); // Keep manufacturer state in sync while typing
+            }}
             placeholder="Volkswagen..."
           />
 

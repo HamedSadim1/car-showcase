@@ -43,7 +43,9 @@ export const deleteSearchParams = (type: string) => {
   return newPathname;
 };
 
-export async function fetchCars(filters: FilterProps) {
+export async function fetchCars(
+  filters: FilterProps,
+): Promise<CarProps[] | { message: string }> {
   const { manufacturer, year, model, limit, fuel } = filters;
 
   // Set the required headers for the API request
@@ -65,7 +67,7 @@ export async function fetchCars(filters: FilterProps) {
     `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?${queryParams.toString()}`,
     {
       headers: headers,
-    }
+    },
   );
 
   // Parse the response as JSON
@@ -80,7 +82,7 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
   url.searchParams.append(
     "customer",
-    process.env.NEXT_PUBLIC_IMAGIN_API_KEY || "hrjavascript-mastery"
+    process.env.NEXT_PUBLIC_IMAGIN_API_KEY || "hrjavascript-mastery",
   );
   url.searchParams.append("make", make);
   url.searchParams.append("modelFamily", model.split(" ")[0]);
