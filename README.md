@@ -1,7 +1,5 @@
 # Car Showcase
 
-![Car Showcase Homepage](public/screenshot.png)
-
 Een moderne webapplicatie voor het verkennen en zoeken van auto's, gebouwd met Next.js 16. Deze applicatie maakt gebruik van de Cars by API-Ninjas API om uitgebreide informatie over auto's op te halen en weer te geven.
 
 ## 🚀 Features
