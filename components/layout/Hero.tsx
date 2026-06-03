@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { CustomButton } from "./";
+import CustomButton from "../ui/CustomButton";
 
 const Hero = () => (
   <div className="hero">

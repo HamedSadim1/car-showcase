@@ -1,6 +1,7 @@
 "use client";
 
-import { SearchBar, CustomFilter } from "@/components";
+import SearchBar from "./SearchBar";
+import CustomFilter from "./CustomFilter";
 import { fuels, yearsOfProduction } from "@/constants";
 
 export default function SearchFilters() {

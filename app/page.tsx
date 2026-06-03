@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { fetchCars } from "@/utils";
 import { DEFAULT_YEAR, DEFAULT_PAGE_LIMIT } from "@/constants";
 import { CarCard, ShowMore, Hero } from "@/components";
-import SearchFilters from "@/components/SearchFilters";
+import SearchFilters from "@/components/search/SearchFilters";
 
 export const dynamic = "force-dynamic";
 

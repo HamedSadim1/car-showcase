@@ -1,11 +1,11 @@
-import CarCard from "./CarCard";
-import CustomButton from "./CustomButton";
-import CustomFilter from "./CustomFilter";
-import Footer from "./Footer";
-import NavBar from "./Navbar";
-import ShowMore from "./ShowMore";
-import SearchBar from "./SearchBar";
-import Hero from "./Hero";
+import CarCard from "./car/CarCard";
+import CustomButton from "./ui/CustomButton";
+import CustomFilter from "./search/CustomFilter";
+import Footer from "./layout/Footer";
+import NavBar from "./layout/Navbar";
+import ShowMore from "./car/ShowMore";
+import SearchBar from "./search/SearchBar";
+import Hero from "./layout/Hero";
 
 export {
   Hero,

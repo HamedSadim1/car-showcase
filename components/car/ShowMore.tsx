@@ -2,7 +2,7 @@
 
 import { ShowMoreProps } from "@/types";
 import { useUpdateSearchParams } from "@/hooks/useUpdateSearchParams";
-import { CustomButton } from "@/components";
+import CustomButton from "../ui/CustomButton";
 
 const ShowMore = ({ pageNumber, isNext }: ShowMoreProps) => {
   const { updateSearchParams } = useUpdateSearchParams();
