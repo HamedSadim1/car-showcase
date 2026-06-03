@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 
 import SearchManufacturer from "./SearchManufacturer";
 import { useUpdateSearchParams } from "@/hooks/useUpdateSearchParams";
@@ -33,11 +33,11 @@ const SearchBar = () => {
   const [model, setModel] = useState("");
   const { setMultipleParams } = useUpdateSearchParams();
 
-  const setManuFacturer = useCallback((value: string | null) => {
+  const setManuFacturer = (value: string | null) => {
     setManufacturerState(value || "");
-  }, []);
+  };
 
-  const handleSearch = useCallback(() => {
+  const handleSearch = () => {
     if (manufacturer.trim() === "" && model.trim() === "") {
       return alert("Please provide some input");
     }
@@ -46,13 +46,13 @@ const SearchBar = () => {
     if (model) params.push(["model", model]);
     if (manufacturer) params.push(["manufacturer", manufacturer]);
     if (params.length > 0) setMultipleParams(params);
-  }, [manufacturer, model, setMultipleParams]);
+  };
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearch();
     }
-  }, [handleSearch]);
+  };
 
   return (
     <div className="searchbar">

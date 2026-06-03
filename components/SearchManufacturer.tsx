@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
 
 import { manufacturers } from "@/constants";
@@ -11,24 +13,20 @@ const SearchManufacturer = ({
 }: SearchManuFacturerProps) => {
   const [query, setQuery] = useState("");
 
-  const filteredManufacturers = useMemo(
-    () =>
-      query === ""
-        ? manufacturers
-        : manufacturers.filter((item) =>
-            item
-              .toLowerCase()
-              .replace(/\s+/g, "")
-              .includes(query.toLowerCase().replace(/\s+/g, "")),
-          ),
-    [query],
-  );
+  const filteredManufacturers =
+    query === ""
+      ? manufacturers
+      : manufacturers.filter((item) =>
+          item
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, "")),
+        );
 
   return (
     <div className="search-manufacturer">
       <Combobox value={manufacturer} onChange={setManuFacturer}>
         <div className="relative w-full">
-          {/* Button for the combobox. Click on the icon to see the complete dropdown */}
           <ComboboxButton className="absolute top-[14px]">
             <Image
               src="/car-logo.svg"
@@ -39,7 +37,6 @@ const SearchManufacturer = ({
             />
           </ComboboxButton>
 
-          {/* Input field for searching */}
           <ComboboxInput
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
@@ -52,7 +49,6 @@ const SearchManufacturer = ({
             placeholder="Volkswagen..."
           />
 
-          {/* Transition for displaying the options */}
           <Transition
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"

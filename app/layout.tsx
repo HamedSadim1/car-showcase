@@ -1,6 +1,13 @@
 import "./globals.css";
 import { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import { Footer, NavBar } from "@/components";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Car Hub",
@@ -13,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="relative">
+    <html lang="en" className={manrope.variable}>
+      <body className="relative font-[family-name:var(--font-manrope)]">
         <NavBar />
         {children}
         <Footer />

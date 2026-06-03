@@ -1,4 +1,3 @@
-import { memo } from "react";
 import Image from "next/image";
 
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
@@ -67,4 +66,4 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
   </Transition>
 );
 
-export default memo(CarDetails);
+export default CarDetails;

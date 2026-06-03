@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { CarProps } from "@/types";
 
 interface CarSpecsProps {
@@ -27,4 +26,4 @@ const CarSpecs = ({ car }: CarSpecsProps) => (
   </div>
 );
 
-export default memo(CarSpecs);
+export default CarSpecs;

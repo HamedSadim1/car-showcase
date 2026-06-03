@@ -1,4 +1,3 @@
-import { memo } from "react";
 import Image from "next/image";
 import { CarProps } from "@/types";
 import { generateCarImageUrl } from "@/utils";
@@ -25,4 +24,4 @@ const CarThumbnails = ({ car }: CarThumbnailsProps) => (
   </div>
 );
 
-export default memo(CarThumbnails);
+export default CarThumbnails;
