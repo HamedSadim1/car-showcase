@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 
 import { calculateCarRent, generateCarImageUrl } from "@/utils";
@@ -17,7 +17,10 @@ const CarCard = ({ car }: CarCardProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const carRent = calculateCarRent(city_mpg, year);
+  const carRent = useMemo(() => calculateCarRent(city_mpg, year), [city_mpg, year]);
+  const carImageUrl = useMemo(() => generateCarImageUrl(car), [car]);
+  const handleOpen = useCallback(() => setIsOpen(true), []);
+  const handleClose = useCallback(() => setIsOpen(false), []);
 
   return (
     <div className="car-card group">
@@ -39,10 +42,11 @@ const CarCard = ({ car }: CarCardProps) => {
 
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src={generateCarImageUrl(car)}
+          src={carImageUrl}
           alt="car model"
           fill
           priority
+          sizes="(max-width: 768px) 100vw, 330px"
           className="object-contain"
         />
       </div>
@@ -76,18 +80,18 @@ const CarCard = ({ car }: CarCardProps) => {
             containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
             textStyles="text-white text-[14px] leading-[17px] font-bold"
             rightIcon="/right-arrow.svg"
-            handleClick={() => setIsOpen(true)}
+            handleClick={handleOpen}
           />
         </div>
       </div>
 
       <CarDetails
         isOpen={isOpen}
-        closeModal={() => setIsOpen(false)}
+        closeModal={handleClose}
         car={car}
       />
     </div>
   );
 };
 
-export default CarCard;
+export default memo(CarCard);

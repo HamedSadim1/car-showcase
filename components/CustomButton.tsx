@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 
 import { CustomButtonProps } from "@/types";
@@ -33,4 +34,4 @@ const Button = ({
   </button>
 );
 
-export default Button;
+export default memo(Button);

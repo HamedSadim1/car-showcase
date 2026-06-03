@@ -1,23 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
+import { useCallback } from "react";
 import { ShowMoreProps } from "@/types";
-import { updateSearchParams } from "@/utils";
+import { useUpdateSearchParams } from "@/hooks/useUpdateSearchParams";
 import { CustomButton } from "@/components";
 
 const ShowMore = ({ pageNumber, isNext }: ShowMoreProps) => {
-  const router = useRouter();
+  const { updateSearchParams } = useUpdateSearchParams();
 
-  const handleNavigation = () => {
-    // Calculate the new limit based on the page number and navigation type
+  const handleNavigation = useCallback(() => {
     const newLimit = (pageNumber + 1) * 10;
-
-    // Update the "limit" search parameter in the URL with the new value
-    const newPathname = updateSearchParams("limit", `${newLimit}`);
-
-    router.push(newPathname);
-  };
+    updateSearchParams("limit", `${newLimit}`);
+  }, [pageNumber, updateSearchParams]);
 
   return (
     <div className="w-full flex-center gap-5 mt-10">

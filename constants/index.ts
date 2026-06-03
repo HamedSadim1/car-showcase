@@ -99,3 +99,21 @@ export const footerLinks = [
     ],
   },
 ];
+
+// --- Rental Pricing Constants ---
+export const RENTAL_BASE_PRICE_PER_DAY = 50;
+export const RENTAL_MILEAGE_FACTOR = 0.1;
+export const RENTAL_AGE_FACTOR = 0.05;
+
+// --- API Configuration ---
+export const CAR_API_HOST = "cars-by-api-ninjas.p.rapidapi.com";
+export const CAR_API_BASE_URL = `https://${CAR_API_HOST}/v1/cars`;
+export const IMAGIN_API_BASE_URL = "https://cdn.imagin.studio/getimage";
+export const DEFAULT_IMAGIN_API_KEY = "hrjavascript-mastery";
+
+// --- Pagination Defaults ---
+export const DEFAULT_PAGE_LIMIT = 10;
+export const DEFAULT_YEAR = 2022;
+
+// --- Car Thumbnail Angles ---
+export const CAR_THUMBNAIL_ANGLES = ["29", "33", "13"] as const;

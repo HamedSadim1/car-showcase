@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useState } from "react";
 
 import SearchManufacturer from "./SearchManufacturer";
+import { useUpdateSearchParams } from "@/hooks/useUpdateSearchParams";
 
 const SearchButton = ({
   otherClasses,
@@ -31,58 +31,28 @@ const SearchButton = ({
 const SearchBar = () => {
   const [manufacturer, setManufacturerState] = useState("");
   const [model, setModel] = useState("");
+  const { setMultipleParams } = useUpdateSearchParams();
 
-  const setManuFacturer = (value: string | null) => {
+  const setManuFacturer = useCallback((value: string | null) => {
     setManufacturerState(value || "");
-  };
+  }, []);
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const handleSearch = () => {
-    console.log("handleSearch called", { manufacturer, model });
+  const handleSearch = useCallback(() => {
     if (manufacturer.trim() === "" && model.trim() === "") {
-      console.log("handleSearch: empty input");
       return alert("Please provide some input");
     }
 
-    updateSearchParams(model, manufacturer);
-  };
+    const params: [string, string][] = [];
+    if (model) params.push(["model", model]);
+    if (manufacturer) params.push(["manufacturer", manufacturer]);
+    if (params.length > 0) setMultipleParams(params);
+  }, [manufacturer, model, setMultipleParams]);
 
-  const updateSearchParams = async (model: string, manufacturer: string) => {
-    // Build a mutable URLSearchParams from the readonly searchParams
-    const newSearchParams = new URLSearchParams(
-      Array.from(searchParams.entries()),
-    );
-
-    if (model) {
-      newSearchParams.set("model", model);
-    } else {
-      newSearchParams.delete("model");
-    }
-
-    if (manufacturer) {
-      newSearchParams.set("manufacturer", manufacturer);
-    } else {
-      newSearchParams.delete("manufacturer");
-    }
-
-    // Keep the same pathname to ensure correct route; use absolute path for reliability
-    const pathname = window.location.pathname || "/";
-    const to = `${pathname}?${newSearchParams.toString()}`;
-    console.log("updateSearchParams -> pushing", to);
-    try {
-      await router.push(to);
-    } catch (err) {
-      console.error("router.push error", err);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearch();
     }
-  };
+  }, [handleSearch]);
 
   return (
     <div className="searchbar">

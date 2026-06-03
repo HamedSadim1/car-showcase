@@ -1,5 +1,5 @@
 import { fetchCars } from "@/utils";
-import { fuels, yearsOfProduction } from "@/constants";
+import { fuels, yearsOfProduction, DEFAULT_YEAR, DEFAULT_PAGE_LIMIT } from "@/constants";
 import { CarCard, ShowMore, SearchBar, CustomFilter, Hero } from "@/components";
 
 export const dynamic = "force-dynamic";
@@ -16,9 +16,9 @@ export default async function Home({
   // Bouw parameters voor de API call
   const filters = {
     manufacturer: (params.manufacturer as string) || "",
-    year: Number(params.year as string) || 2022,
+    year: Number(params.year as string) || DEFAULT_YEAR,
     fuel: (params.fuel as string) || "",
-    limit: Number(params.limit as string) || 10,
+    limit: Number(params.limit as string) || DEFAULT_PAGE_LIMIT,
     model: (params.model as string) || "",
   };
 
@@ -37,7 +37,7 @@ export default async function Home({
         {/* Titel en beschrijving */}
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
-          <p>Explore out cars you might like</p>
+          <p>Explore our cars you might like</p>
         </div>
 
         {/* Zoekfilters */}
@@ -62,8 +62,8 @@ export default async function Home({
 
             {/* Meer tonen component */}
             <ShowMore
-              pageNumber={(Number(params.limit as string) || 10) / 10}
-              isNext={(Number(params.limit as string) || 10) > allCars.length}
+              pageNumber={(Number(params.limit as string) || DEFAULT_PAGE_LIMIT) / DEFAULT_PAGE_LIMIT}
+              isNext={(Number(params.limit as string) || DEFAULT_PAGE_LIMIT) > allCars.length}
             />
           </section>
         ) : (
