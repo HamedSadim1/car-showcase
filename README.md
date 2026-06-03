@@ -51,7 +51,7 @@ Een moderne webapplicatie voor het verkennen en zoeken van auto's, gebouwd met N
 
    ```env
    NEXT_PUBLIC_RAPID_API_KEY=jouw_api_sleutel_hier
-   NEXT_PUBLIC_IMAGIN_API_KEY=hrjavascript-mastery
+   NEXT_PUBLIC_IMAGIN_API_KEY=jouw_imagin_api_key
    ```
 
 4. **Ontwikkelserver starten**
