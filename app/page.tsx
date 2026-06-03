@@ -3,7 +3,6 @@ import { DEFAULT_YEAR, DEFAULT_PAGE_LIMIT } from "@/constants";
 import { Hero } from "@/components";
 import SearchFilters from "@/components/search/SearchFilters";
 import CarCatalogueSection from "@/components/car/CarCatalogueSection";
-import SearchFiltersSkeleton from "@/components/search/SearchFiltersSkeleton";
 import CarCatalogueSkeleton from "@/components/car/CarCatalogueSkeleton";
 
 export const dynamic = "force-dynamic";
@@ -37,9 +36,8 @@ export default async function Home({
           <p>Explore our cars you might like</p>
         </div>
 
-        <Suspense fallback={<SearchFiltersSkeleton />}>
-          <SearchFilters />
-        </Suspense>
+        {/* SearchFilters - statisch, rendert direct */}
+        <SearchFilters />
 
         {/* Suspense rondom de async data-fetching sectie */}
         <Suspense fallback={<CarCatalogueSkeleton />}>
