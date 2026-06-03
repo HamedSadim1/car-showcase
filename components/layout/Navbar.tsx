@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CustomButton from "./CustomButton";
+import CustomButton from "../ui/CustomButton";
 import Link from "next/link";
 
 const Navbar = () => {
