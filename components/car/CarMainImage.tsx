@@ -7,7 +7,7 @@ interface CarMainImageProps {
 }
 
 const CarMainImage = ({ car }: CarMainImageProps) => (
-  <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
+  <div className="relative w-full h-40 bg-cover bg-center rounded-lg" style={{ backgroundImage: "var(--background-pattern)" }}>
     <Image
       src={generateCarImageUrl(car)}
       alt={`${car.make} ${car.model}`}

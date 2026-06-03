@@ -13,16 +13,19 @@
   --background-hero-bg: url("/hero-bg.png");
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Manrope", sans-serif;
+  }
 }
 
 @layer components {
   /* START: General styles */
   .max-width {
-    @apply max-w-360 mx-auto;
+    @apply max-w-[1440px] mx-auto;
   }
 
   .padding-x {
@@ -48,7 +51,7 @@
 
   /* START: Hero styles */
   .hero {
-    @apply flex xl:flex-row flex-col gap-5 relative z-0 max-w-360 mx-auto;
+    @apply flex xl:flex-row flex-col gap-5 relative z-0 max-w-[1440px] mx-auto;
   }
 
   .hero__title {
@@ -64,11 +67,11 @@
   }
 
   .hero__image {
-    @apply relative xl:w-full w-[90%] xl:h-full h-147.5 z-0;
+    @apply relative xl:w-full w-[90%] xl:h-full h-[590px] z-0;
   }
 
   .hero__image-overlay {
-    @apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-repeat-round -z-10 w-full xl:h-screen h-147.5 overflow-hidden;
+    @apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
     background-image: var(--background-hero-bg);
   }
   /* END: Hero styles */
@@ -105,19 +108,19 @@
   }
 
   .car-card__content-title {
-    @apply text-[22px] leading-6.5 font-bold capitalize;
+    @apply text-[22px] leading-[26px] font-bold capitalize;
   }
 
   .car-card__price {
-    @apply flex mt-6 text-[32px] leading-9.5 font-extrabold;
+    @apply flex mt-6 text-[32px] leading-[38px] font-extrabold;
   }
 
   .car-card__price-dollar {
-    @apply self-start text-[14px] leading-4.25 font-semibold;
+    @apply self-start text-[14px] leading-[17px] font-semibold;
   }
 
   .car-card__price-day {
-    @apply self-end text-[14px] leading-4.25 font-medium;
+    @apply self-end text-[14px] leading-[17px] font-medium;
   }
 
   .car-card__image {
@@ -133,7 +136,7 @@
   }
 
   .car-card__icon-text {
-    @apply text-[14px] leading-4.25;
+    @apply text-[14px] leading-[17px];
   }
 
   .car-card__btn-container {
@@ -158,7 +161,7 @@
 
   /* START: Custom Filter styles */
   .custom-filter__btn {
-    @apply relative w-full min-w-31.75 flex justify-between items-center cursor-default rounded-lg bg-white py-2 px-3 text-left shadow-md sm:text-sm border;
+    @apply relative w-full min-w-[127px] flex justify-between items-center cursor-default rounded-lg bg-white py-2 px-3 text-left shadow-md sm:text-sm border;
   }
 
   .custom-filter__options {
@@ -184,7 +187,7 @@
   }
 
   .footer__link {
-    @apply flex flex-col gap-6 text-base min-w-42.5;
+    @apply flex flex-col gap-6 text-base min-w-[170px];
   }
 
   .footer__copyrights {
@@ -206,7 +209,7 @@
   }
 
   .searchbar__input {
-    @apply w-full h-12 pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm;
+    @apply w-full h-[48px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm;
   }
   /* END: searchbar styles */
 
@@ -216,7 +219,7 @@
   }
 
   .search-manufacturer__input {
-    @apply w-full h-12 pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none cursor-pointer text-sm;
+    @apply w-full h-[48px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none cursor-pointer text-sm;
   }
 
   .search-manufacturer__options {
