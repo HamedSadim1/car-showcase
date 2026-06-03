@@ -6,7 +6,7 @@ import { Footer, NavBar } from "@/components";
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
-  display: "swap",
+  display: "optional",
 });
 
 export const metadata: Metadata = {
