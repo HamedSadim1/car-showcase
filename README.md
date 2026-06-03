@@ -77,24 +77,31 @@ Een moderne webapplicatie voor het verkennen en zoeken van auto's, gebouwd met N
 car-showcase/
 ├── app/                        # Next.js App Router
 │   ├── globals.css             # Globale styles (Tailwind v4)
-│   ├── layout.tsx              # Root layout
+│   ├── layout.tsx              # Root layout (next/font)
 │   ├── page.tsx                # Home page (Server Component)
+│   ├── loading.tsx             # Route loading state
+│   ├── not-found.tsx           # 404 pagina
 │   └── error.tsx               # Error boundary
-├── components/                 # React componenten
-│   ├── CarCard.tsx             # Auto kaart component (memo'd)
-│   ├── CarDetails.tsx          # Auto detail modal (memo'd)
-│   ├── CarMainImage.tsx        # Hoofd afbeelding (memo'd)
-│   ├── CarThumbnails.tsx       # Thumbnail afbeeldingen (memo'd)
-│   ├── CarSpecs.tsx            # Auto specificaties (memo'd)
-│   ├── CustomButton.tsx        # Herbruikbare knop (memo'd)
-│   ├── CustomFilter.tsx        # Filter dropdown
-│   ├── Footer.tsx              # Footer
-│   ├── Hero.tsx                # Hero sectie
-│   ├── Navbar.tsx              # Navigatiebalk
-│   ├── SearchBar.tsx           # Zoekbalk
-│   ├── SearchFilters.tsx       # Zoek filters wrapper
-│   ├── SearchManufacturer.tsx  # Merk zoekcomponent
-│   └── ShowMore.tsx            # "Meer laden" knop
+├── components/                 # React componenten (georganiseerd per domein)
+│   ├── index.ts                # Barrel export
+│   ├── car/                    # Auto gerelateerde componenten
+│   │   ├── CarCard.tsx         # Auto kaart component
+│   │   ├── CarDetails.tsx      # Auto detail modal
+│   │   ├── CarMainImage.tsx    # Hoofd afbeelding
+│   │   ├── CarThumbnails.tsx   # Thumbnail afbeeldingen
+│   │   ├── CarSpecs.tsx        # Auto specificaties
+│   │   └── ShowMore.tsx        # "Meer laden" knop
+│   ├── search/                 # Zoek & filter componenten
+│   │   ├── SearchBar.tsx       # Zoekbalk
+│   │   ├── SearchFilters.tsx   # Zoek filters wrapper
+│   │   ├── SearchManufacturer.tsx # Merk zoekcomponent
+│   │   └── CustomFilter.tsx    # Filter dropdown
+│   ├── layout/                 # Layout componenten
+│   │   ├── Navbar.tsx          # Navigatiebalk
+│   │   ├── Footer.tsx          # Footer
+│   │   └── Hero.tsx            # Hero sectie
+│   └── ui/                     # Generieke UI componenten
+│       └── CustomButton.tsx    # Herbruikbare knop
 ├── hooks/                      # Gedeelde React hooks
 │   └── useUpdateSearchParams.ts # URL search params beheer
 ├── constants/                  # Centrale constanten (SSOT)
@@ -106,7 +113,9 @@ car-showcase/
 │   └── workflows/
 │       └── pr.yml              # GitHub Actions CI workflow
 ├── .husky/
-│   └── pre-commit              # Pre-commit hook (lint + typecheck)
+│   ├── pre-commit              # Pre-commit hook (lint + typecheck)
+│   ├── commit-msg              # Commitlint hook (Conventional Commits)
+│   └── pre-push                # Pre-push hook (build check)
 └── public/                     # Statische assets
 ```
 
