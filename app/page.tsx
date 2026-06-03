@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import { fetchCars } from "@/utils";
-import { fuels, yearsOfProduction, DEFAULT_YEAR, DEFAULT_PAGE_LIMIT } from "@/constants";
-import { CarCard, ShowMore, SearchBar, CustomFilter, Hero } from "@/components";
+import { DEFAULT_YEAR, DEFAULT_PAGE_LIMIT } from "@/constants";
+import { CarCard, ShowMore, Hero } from "@/components";
+import SearchFilters from "@/components/SearchFilters";
 
 export const dynamic = "force-dynamic";
 
@@ -40,38 +42,33 @@ export default async function Home({
           <p>Explore our cars you might like</p>
         </div>
 
-        {/* Zoekfilters */}
-        <div className="home__filters">
-          <SearchBar />
+        <Suspense>
+          {/* Zoekfilters */}
+          <SearchFilters />
 
-          <div className="home__filter-container">
-            <CustomFilter title="fuel" options={fuels} />
-            <CustomFilter title="year" options={yearsOfProduction} />
-          </div>
-        </div>
+          {/* Conditionele rendering gebaseerd op data */}
+          {!isDataEmpty ? (
+            <section>
+              {/* Lijst van auto's */}
+              <div className="home__cars-wrapper">
+                {allCars?.map((car, i) => (
+                  <CarCard key={i} car={car} />
+                ))}
+              </div>
 
-        {/* Conditionele rendering gebaseerd op data */}
-        {!isDataEmpty ? (
-          <section>
-            {/* Lijst van auto's */}
-            <div className="home__cars-wrapper">
-              {allCars?.map((car, i) => (
-                <CarCard key={i} car={car} />
-              ))}
+              {/* Meer tonen component */}
+              <ShowMore
+                pageNumber={(Number(params.limit as string) || DEFAULT_PAGE_LIMIT) / DEFAULT_PAGE_LIMIT}
+                isNext={(Number(params.limit as string) || DEFAULT_PAGE_LIMIT) > allCars.length}
+              />
+            </section>
+          ) : (
+            <div className="home__error-container">
+              <h2 className="text-black text-xl font-bold">Oops, no results</h2>
+              <p>{(allCars as { message?: string })?.message}</p>
             </div>
-
-            {/* Meer tonen component */}
-            <ShowMore
-              pageNumber={(Number(params.limit as string) || DEFAULT_PAGE_LIMIT) / DEFAULT_PAGE_LIMIT}
-              isNext={(Number(params.limit as string) || DEFAULT_PAGE_LIMIT) > allCars.length}
-            />
-          </section>
-        ) : (
-          <div className="home__error-container">
-            <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-            <p>{(allCars as { message?: string })?.message}</p>
-          </div>
-        )}
+          )}
+        </Suspense>
       </div>
     </main>
   );
