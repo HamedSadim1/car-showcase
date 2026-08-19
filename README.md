@@ -165,10 +165,6 @@ Bijdragen zijn welkom! Volg deze stappen:
 4. Push naar de branch (`git push origin feature/AmazingFeature`)
 5. Open een Pull Request
 
-## 📝 Licentie
-
-Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) bestand voor details.
-
 ## 👨‍💻 Auteur
 
 **Hamed Sadim** - [GitHub](https://github.com/HamedSadim1)
