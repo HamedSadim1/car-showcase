@@ -7,6 +7,18 @@ import CarCatalogueSkeleton from "@/components/car/CarCatalogueSkeleton";
 
 export const dynamic = "force-dynamic";
 
+const getFirstSearchParam = (
+  value: string | string[] | undefined,
+): string => (Array.isArray(value) ? value[0] : value) || "";
+
+const getIntegerSearchParam = (
+  value: string | string[] | undefined,
+  fallback: number,
+): number => {
+  const parsed = Number.parseInt(getFirstSearchParam(value), 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
 export default async function Home({
   searchParams,
 }: {
@@ -14,15 +26,19 @@ export default async function Home({
 }) {
   const params = await searchParams;
 
-  const filters = {
-    manufacturer: (params.manufacturer as string) || "",
-    year: Number(params.year as string) || DEFAULT_YEAR,
-    fuel: (params.fuel as string) || "",
-    limit: Number(params.limit as string) || DEFAULT_PAGE_LIMIT,
-    model: (params.model as string) || "",
-  };
+  const requestedLimit = getIntegerSearchParam(
+    params.limit,
+    DEFAULT_PAGE_LIMIT,
+  );
+  const limit = Math.min(Math.max(requestedLimit, DEFAULT_PAGE_LIMIT), 50);
 
-  const limit = Number(params.limit as string) || DEFAULT_PAGE_LIMIT;
+  const filters = {
+    manufacturer: getFirstSearchParam(params.manufacturer),
+    year: getIntegerSearchParam(params.year, DEFAULT_YEAR),
+    fuel: getFirstSearchParam(params.fuel),
+    limit,
+    model: getFirstSearchParam(params.model),
+  };
 
   return (
     <main className="overflow-hidden">

@@ -50,7 +50,7 @@ Een moderne webapplicatie voor het verkennen en zoeken van auto's, gebouwd met N
    Maak een `.env.local` bestand in de root directory:
 
    ```env
-   NEXT_PUBLIC_RAPID_API_KEY=jouw_api_sleutel_hier
+   RAPID_API_KEY=jouw_api_sleutel_hier
    NEXT_PUBLIC_IMAGIN_API_KEY=jouw_imagin_api_key
    ```
 
@@ -147,7 +147,7 @@ GitHub Actions draait automatisch bij elke pull request naar `main`:
 1. Push naar GitHub
 2. Verbind repository met Vercel
 3. Stel omgevingsvariabelen in Vercel dashboard:
-   - `NEXT_PUBLIC_RAPID_API_KEY`
+   - `RAPID_API_KEY`
    - `NEXT_PUBLIC_IMAGIN_API_KEY`
 4. Deploy
 

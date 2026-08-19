@@ -41,5 +41,5 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          NEXT_PUBLIC_RAPID_API_KEY: ${{ secrets.NEXT_PUBLIC_RAPID_API_KEY }}
+          RAPID_API_KEY: ${{ secrets.RAPID_API_KEY }}
           NEXT_PUBLIC_IMAGIN_API_KEY: ${{ secrets.NEXT_PUBLIC_IMAGIN_API_KEY }}

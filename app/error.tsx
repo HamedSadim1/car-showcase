@@ -1,7 +1,6 @@
 "use client";
 
 export default function Error({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };
@@ -10,7 +9,9 @@ export default function Error({
   return (
     <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
       <h2 className="text-2xl font-bold text-black">Something went wrong!</h2>
-      <p className="text-gray-500">{error.message}</p>
+      <p className="text-gray-500">
+        Please try again later or return to the previous page.
+      </p>
       <button
         type="button"
         onClick={reset}

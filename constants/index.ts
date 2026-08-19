@@ -109,7 +109,6 @@ export const RENTAL_AGE_FACTOR = 0.05;
 export const CAR_API_HOST = "cars-by-api-ninjas.p.rapidapi.com";
 export const CAR_API_BASE_URL = `https://${CAR_API_HOST}/v1/cars`;
 export const IMAGIN_API_BASE_URL = "https://cdn.imagin.studio/getimage";
-export const DEFAULT_IMAGIN_API_KEY = "hrjavascript-mastery";
 
 // --- Pagination Defaults ---
 export const DEFAULT_PAGE_LIMIT = 10;

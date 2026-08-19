@@ -1,4 +1,4 @@
-import { fetchCars } from "@/utils";
+import { fetchCars } from "@/utils/server";
 import { CarCard, ShowMore } from "@/components";
 import { DEFAULT_PAGE_LIMIT } from "@/constants";
 
